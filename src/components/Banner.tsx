@@ -4,7 +4,7 @@ const Banner = () => {
 
     return (
         <div className="h-[90%]">
-            <div className="py-6 container mx-auto  md:flex justify-between items-center h-full">
+            <div className="py-6 container mx-auto flex flex-col md:flex-row justify-between items-center h-full">
                 <div className="space-y-10">
                     <h1 className="text-4xl md:text-6xl font-bold text-black md:text-left text-center">Build Your Ideal <br />
                         <span className="text-transparent bg-clip-text

@@ -3,8 +3,10 @@ import Logo from '../assets/logo-text.png'
 export default function Nav() {
 
     return (
-        <nav className="h-[10%]">
-            <div className='pt-5 container mx-auto flex justify-between items-center'>
+        <nav className="h-[10%] flex items-center
+        fixed top-0 right-0 left-0
+        border-b border-gray-400/20 backdrop-blur-md ">
+            <div className='container mx-auto flex justify-between items-center'>
                 <div>
                     <img src={Logo} alt="logo" />
                 </div>
@@ -20,7 +22,7 @@ export default function Nav() {
                     <button className='text-white hover:bg-[#c0196f] bg-[#D91B7E] border rounded-full px-3 py-1'>Sign Up</button>
                 </div>
             </div>
-            <div className='divider'></div>
+
 
         </nav>
     )
