@@ -11,6 +11,7 @@ interface props {
 export default function Technology({ stacksPromise }: props) {
     const [selectedStacks, setSelectedStacks] = useState<Istack[]>([])
 
+
     return (
         <div>
             <div className="pt-15 container mx-auto px-4">
@@ -34,15 +35,13 @@ export default function Technology({ stacksPromise }: props) {
                             </div>
                         }>
 
-
                             {
-
                                 <TechnologiesList stacksPromise={stacksPromise}
                                     selectedStacks={selectedStacks}
                                     setSelectedStacks={setSelectedStacks}
                                 ></TechnologiesList>
-
                             }
+
                         </Suspense>
                     </div>
 
@@ -51,8 +50,16 @@ export default function Technology({ stacksPromise }: props) {
                             <h2 className="font-bold text-black text-lg">Your Stack</h2>
                             <p className="mt-2 text-gray-600 text-sm">No technologies selected yet.</p>
 
-                            <div className="border border-gray-100 p-3 rounded-xl mt-5">
-                                <TechStackSelected></TechStackSelected>
+                            <div className="space-y-5 border border-gray-100 p-3 rounded-xl mt-5">
+                                {
+                                    selectedStacks.map(selectedStack => <TechStackSelected key={selectedStack.id}
+                                        setSelectedStacks={setSelectedStacks}
+                                        selectedStack={selectedStack}
+                                        selectedStacks={selectedStacks}
+                                    >
+
+                                    </TechStackSelected>)
+                                }
                             </div>
                         </div>
                     </div>

@@ -1,19 +1,27 @@
-import { useState, type Dispatch, type SetStateAction } from "react"
+import { type Dispatch, type SetStateAction } from "react"
 import type { Istack } from "../types/Stack"
 
 interface props {
     stack: Istack,
     selectedStacks: Istack[],
     setSelectedStacks: Dispatch<SetStateAction<Istack[]>>
+
 }
 
-export default function TechnologyCard({ stack, selectedStacks, setSelectedStacks }: props) {
-    const [isSelected, setIsSelected] = useState<boolean>(false)
+export default function TechnologyCard({ stack,
+    selectedStacks,
+    setSelectedStacks }: props) {
+
+    // const [isSelected, setIsSelected] = useState<boolean>(false)
+    const isSelected = selectedStacks.some(sStack => sStack.id === stack.id)
+
+
+
     const handelAdd = () => {
-        setIsSelected(!isSelected)
-        if (isSelected) {
-            setSelectedStacks([stack, ...selectedStacks])
-        }
+
+        setSelectedStacks([...selectedStacks, stack])
+        // setIsSelected(!isSelected)
+
     }
     return (
         <div className="border border-gray-100 rounded-md p-5 hover:shadow-md">
@@ -32,10 +40,12 @@ export default function TechnologyCard({ stack, selectedStacks, setSelectedStack
             {/* button click handel  */}
 
             <button className="w-full hover:bg-[#575757] rounded-md py-2
-             bg-[#0A0F1D] text-white mt-4"
+             bg-[#0A0F1D] text-white font-semibold mt-4
+              disabled:text-[#D81B7E] disabled:bg-[#d81b7d2a] disabled:cursor-no-drop"
                 onClick={handelAdd}
+                disabled={isSelected}
             >
-                {isSelected?"":"Add to Stack"}
+                {isSelected ? "✓ Added to Stack" : "Add to Stack"}
             </button>
         </div>
     )
