@@ -18,19 +18,39 @@ export default function TechnologyCard({ stack,
 
 
     const handelAdd = () => {
-        setSelectedStacks([...selectedStacks, stack])
 
-        toast.success(`${stack.name} Added To Stack`, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-        });
+
+        if (selectedStacks.some(selectedst => selectedst.id === stack.id)) {
+
+            toast.warn(`${stack.name} already in Stack`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+        }
+        else {
+            setSelectedStacks([...selectedStacks, stack])
+
+            toast.success(`${stack.name} added To Stack`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+
+
+        }
 
     }
     return (
@@ -49,11 +69,16 @@ export default function TechnologyCard({ stack,
 
             {/* button click handel  */}
 
-            <button className="w-full hover:bg-[#575757] rounded-md py-2
-             bg-[#0A0F1D] text-white font-semibold mt-4
-              disabled:text-[#D81B7E] disabled:bg-[#d81b7d2a] disabled:cursor-no-drop"
+            <button className={`w-full  rounded-md  font-semibold mt-4 btn
+
+            ${isSelected?"text-[#D81B7E] bg-[#d81b7d2a] cursor-no-drop":
+            "bg-[#0A0F1D] text-white hover:bg-[#575757]"}
+
+            `}
+
+            //   disabled:text-[#D81B7E] disabled:bg-[#d81b7d2a] disabled:cursor-no-drop`
                 onClick={handelAdd}
-                disabled={isSelected}
+            // disabled={isSelected}
             >
                 {isSelected ? "✓ Added to Stack" : "Add to Stack"}
             </button>

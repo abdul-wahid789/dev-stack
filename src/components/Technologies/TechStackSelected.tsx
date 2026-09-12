@@ -24,18 +24,18 @@ export default function TechStackSelected({ selectedStack, selectedStacks, setSe
     }
 
     return (
-        <div className="flex justify-between items-center hover:shadow border border-gray-100 p-2 rounded-xl">
+        <div className="flex justify-between items-center
+        hover:shadow border
+         border-gray-100 p-2 rounded-xl">
             <div className="flex">
-                <img className="mr-2 w-8" src={selectedStack.icon} alt="logo" />
+                <img className="mr-2 w-5" src={selectedStack.icon} alt="logo" />
                 <div>
                     <h3 className="text-black font-bold">{selectedStack.name}</h3>
                     <p className="text-xs">{selectedStack.category}</p>
                 </div>
             </div>
             <div>
-                <button className="hover:bg-red-300
-                                        text-xl text-red-500 bg-red-100
-                                        px-2 rounded-md"
+                <button className=" btn btn-soft btn-error  text-xl rounded-md"
                     onClick={handelSelectedStack}
                 >X</button>
             </div>

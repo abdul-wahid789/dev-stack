@@ -26,9 +26,9 @@ export default function Nav() {
                     <li><a href="/">Contact</a></li>
                 </ul>
                 <div className='flex items-center gap-2 text-xs md:text-base'>
-                    <button className='hover:text-[#D91B7E] hover:pointer-coarse:
+                    <button className='hover:text-[#D91B7E] hover:cursor-pointer
                     border-[#D91B7E] border rounded-full px-3 py-1'>Sign In</button>
-                    <button className='text-white hover:bg-[#c0196f]
+                    <button className='text-white hover:bg-[#c0196f] hover:cursor-pointer
                      bg-[#D91B7E] border rounded-full px-3 py-1'>Sign Up</button>
                 </div>
             </div>

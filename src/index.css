@@ -7,6 +7,3 @@ body {
   font-family: "Plus Jakarta Sans", sans-serif;
   color: #475569;
 }
-button:not(:disabled) {
-  cursor: pointer;
-}

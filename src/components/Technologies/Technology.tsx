@@ -13,18 +13,33 @@ export default function Technology({ stacksPromise }: props) {
     const [selectedStacks, setSelectedStacks] = useState<Istack[]>([])
 
     const handelRemoveAll = () => {
-        setSelectedStacks([])
-         toast.error(`All Stack Removed`, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            transition: Bounce,
-        });
+        if (selectedStacks.length) {
+            setSelectedStacks([])
+            toast.error(`All Stack Removed`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            });
+        }
+        else {
+            toast.warn(`Empty Stack`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+        }
     }
 
 
@@ -67,9 +82,14 @@ export default function Technology({ stacksPromise }: props) {
                             <h2 className="font-bold text-black text-lg">Your Stack</h2>
 
                             <p className="mt-2 text-gray-600 text-sm">
-                                {selectedStacks.length ? `${selectedStacks.length} Technology Selected` : `No technologies selected yet.`}</p>
+                                {selectedStacks.length ?
 
-                            <div className="mx-auto w-full space-y-5 border border-gray-100 p-3 rounded-xl mt-5">
+                                    `${selectedStacks.length} Technology Selected`
+                                    :
+                                    `No technologies selected yet.`}</p>
+
+                            <div className="mx-auto w-full space-y-5 border
+                             border-gray-100 p-3 rounded-xl mt-5">
                                 {selectedStacks.length ?
                                     selectedStacks.map(selectedStack => <TechStackSelected key={selectedStack.id}
                                         setSelectedStacks={setSelectedStacks}
@@ -84,14 +104,9 @@ export default function Technology({ stacksPromise }: props) {
                                     <p className="text-center">Your stack is empty.</p>}
 
 
-
-
-
-
                             </div>
-                            <button className="hover:bg-red-100
-                            text-red-500 border border-red-500
-                            p-2 rounded-xl font-bold mt-5"
+                            <button className="btn btn-outline btn-error  mt-5
+                            p-2 rounded-xl font-bold"
                                 onClick={handelRemoveAll}
                             >Remove All</button>
                         </div>
