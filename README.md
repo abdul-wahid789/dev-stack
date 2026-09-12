@@ -16,18 +16,24 @@ Dev Stack is a modern, responsive web application designed to help developers se
 3. **Interactive & Responsive UI:** Experience a clean, minimal design equipped with instant visual feedback (via **toast** notifications) that looks great on both desktop and mobile devices.
 
 ### Some Common Questions
-1. What is JSX, and why is it used in React? <br>
-JSX file contain HTML and JavaScript. It helps render conditionally or use any javascript power in HTML. in .html file we can not write js in the middle of html. <br>
-In React when conditional rendering or need to use any JS power in HTML JSX is the saviour. So in the end we can say it JSX is the Super Power of HTML file.
-2. What is the difference between props and state? <br>
-Props means properties of the function and state is the internal memoery of the components.
-3. What does the useState hook do, and where did you use it in this project? <br>
-useState is the internal memory of the component. It initailly hold the given value. useState use to change an element of the html without rerendering the whole page. It render only the changed portion of the html. For the change it instant. In this project useState play an important role. In TechStackCard usestate used to change **add to stack** button background colour. When it pressed it change the colour of the button. Technology component Your Stack div hold the selected stack list, when removing the selected stack list it change the add to stack to previous state and make the button clickable again.
-4. What does the useEffect hook do, and why did you need it to load the JSON data?
+1. *What is JSX, and why is it used in React?* <br>
+JSX is basically HTML with JavaScript added to it. It allows us to write JavaScript logic right in HTML. In a typical .html file we cannot write JS directly in the middle of the HTML tags but in React, JSX helps for this. JSX handles if conditional rendering or use JS inside HTML. So, JSX as giving an HTML file superpowers.
 
-5. Why does every item in a .map() list need a unique key prop? <br>
-When rendering from a loop like map it requires a unique **key** to keep track of the component. So that when it need to change a state of the component it can find the component that need to change.
-6. What is conditional rendering? Show one place you used it (example: the empty stack message). <br>
-Conditional rendering is render a component via condition. Empty stack is use conditional rendering. When selectedStacks array is empty it shows the empty stack. If the array is not empty it map from the selectedstack array and render each stack.
+2. *What is the difference between props and state?* <br>
+Props (full form properties) are data passed to a component like function. State is the internal memory of a component. It contains data that is specific to that component and can change over time.
+
+3. *What does the useState hook do, and where did you use it in this project?* <br>
+useState is the component’s internal memory. It has an initial value and it lets us update the UI instantly without reloading the entire page. React re-renders only the portion of the HTML that has changed using Diff algorithm. <br>
+useState plays a huge part in this project. I used it to track the selectedStacks array. It also handles the ***Add to Stack*** buttons on the tech cards. It disables them and changes the text when an item is added, and resets them to be clickable again if the item is removed from the ***Your Stack*** list.
+
+4. *What does the useEffect hook do, and why did you need it to load the JSON data?*
+A hook called useEffect is used to manage reading an external file or retrieving data from an API. Because data fetching takes place in the background, we require it to load JSON data. In order to prevent the application from stopping or becoming trapped in a never-ending rendering loop as it waits for the data to arrive, useEffect makes sure the data is fetched correctly after the component first renders.
+
+5. *Why does every item in a .map() list need a unique key prop?* <br>
+React needs a unique key prop to track each individual component when rendering elements from a loop as map(). React is able to identify the precise component that needs to be modified when an item is added, removed, or has a state change without affecting the rest of the list.
+
+6. *What is conditional rendering? Show one place you used it (example: the empty stack message).* <br>
+Displaying a component or user interface element in response to a certain condition is known as conditional rendering. I used it in the ***Your Stack*** section, where **Your stack is empty** is displayed if the selectedStacks array is empty. Instead, it renders each chosen technology card by mapping through the selectedStacks array if the array is not empty.
+
 7. How do you pass data from a parent component to a child component, and how does a child send something back to the parent? <br>
-In React we can only send the data from the parent to child. It is not possible send data from child to parent component. When need share data from child to parent, need to declear variable in the parent then send it to child. child write data by calling function in the variable usesally set function.
+Data only moves in one direction in React, from the parent to the kid via props. Data cannot be sent straight back to the parent component by a child. On the other hand, we can declare a state variable in the parent and pass its update function—typically a set function—down to the child as a prop when we need to share data backup. In order to write data back to the parent's state, the child can then initiate that function.
