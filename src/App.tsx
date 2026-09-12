@@ -3,6 +3,7 @@ import Banner from "./components/Banner"
 import Nav from "./components/Nav"
 import Technology from "./components/Technologies/Technology"
 import type { Istack } from "./components/types/Stack"
+import Footer from "./components/Footer"
 
 const stackFetch = async (): Promise<Istack[]> => {
   const res = await fetch("/data.json")
@@ -20,8 +21,11 @@ function App() {
         <Banner />
       </header>
       <main>
-          <Technology stacksPromise={stacksPromise}></Technology>
+        <Technology stacksPromise={stacksPromise}></Technology>
       </main>
+      <footer>
+        <Footer></Footer>
+      </footer>
 
     </>
   )

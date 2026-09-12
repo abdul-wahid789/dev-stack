@@ -1,5 +1,6 @@
 import { type Dispatch, type SetStateAction } from "react"
 import type { Istack } from "../types/Stack"
+import { Bounce, toast } from "react-toastify"
 
 interface props {
     stack: Istack,
@@ -12,26 +13,35 @@ export default function TechnologyCard({ stack,
     selectedStacks,
     setSelectedStacks }: props) {
 
-    // const [isSelected, setIsSelected] = useState<boolean>(false)
     const isSelected = selectedStacks.some(sStack => sStack.id === stack.id)
 
 
 
     const handelAdd = () => {
-
         setSelectedStacks([...selectedStacks, stack])
-        // setIsSelected(!isSelected)
+
+        toast.success(`${stack.name} Added To Stack`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+        });
 
     }
     return (
         <div className="border border-gray-100 rounded-md p-5 hover:shadow-md">
             <div className="flex justify-between items-center">
                 <img className="w-10" src={stack.icon} alt="logo" />
-                <p className="badge badge-soft bg-[#d81b7d2a] text-[#D81B7E]">{stack.badge}</p>
+                <p className="text-xs badge badge-soft bg-[#d81b7d2a] text-[#D81B7E]">{stack.badge}</p>
             </div>
             <h2 className="mt-4 text-xl font-bold text-black">{stack.name}</h2>
-            <p className="mt-2">{stack.description}</p>
-            <div className="flex justify-between mt-5 text-sm items-center">
+            <p className="mt-2 line-clamp-2">{stack.description}</p>
+            <div className="flex justify-between mt-5 text-xs items-center">
                 <p className="bg-gray-200 rounded-md py-1 px-2">{stack.category}</p>
                 <p className="">{stack.difficulty}</p>
                 <p className="font-bold">⭐ {stack.rating}</p>

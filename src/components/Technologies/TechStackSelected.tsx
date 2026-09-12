@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from "react"
 import type { Istack } from "../types/Stack"
+import { Bounce, toast } from "react-toastify"
 interface props {
     selectedStack: Istack,
     selectedStacks: Istack[],
@@ -9,10 +10,21 @@ interface props {
 export default function TechStackSelected({ selectedStack, selectedStacks, setSelectedStacks }: props) {
     const handelSelectedStack = () => {
         setSelectedStacks(selectedStacks.filter(stack => stack.id !== selectedStack.id))
+        toast.error(`${selectedStack.name} Removed`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+        });
     }
 
     return (
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center hover:shadow border border-gray-100 p-2 rounded-xl">
             <div className="flex">
                 <img className="mr-2 w-8" src={selectedStack.icon} alt="logo" />
                 <div>
@@ -28,5 +40,6 @@ export default function TechStackSelected({ selectedStack, selectedStacks, setSe
                 >X</button>
             </div>
         </div>
+
     )
 }

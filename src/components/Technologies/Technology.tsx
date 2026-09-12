@@ -2,6 +2,7 @@ import { Suspense, useState } from "react";
 import TechStackSelected from "./TechStackSelected";
 import type { Istack } from "../types/Stack";
 import { TechnologiesList } from "./TechnologiesList";
+import { Bounce, toast } from "react-toastify";
 
 interface props {
     stacksPromise: Promise<Istack[]>
@@ -11,14 +12,30 @@ interface props {
 export default function Technology({ stacksPromise }: props) {
     const [selectedStacks, setSelectedStacks] = useState<Istack[]>([])
 
+    const handelRemoveAll = () => {
+        setSelectedStacks([])
+         toast.error(`All Stack Removed`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+        });
+    }
+
+
 
     return (
         <div>
             <div className="pt-15 container mx-auto px-4">
                 <div className="mb-8">
                     <h1 className="font-bold text-4xl text-black">
-                        Explore the{' '}
-                        <span className="text-transparent bg-clip-text bg-liner-to-r from-[#EC4899] to-[#8B5CF6]">
+                        Explore the
+                        <span className="text-transparent bg-clip-text bg-linear-to-r from-[#EC4899] to-[#8B5CF6]">
                             Technologies
                         </span>
                     </h1>
@@ -31,7 +48,7 @@ export default function Technology({ stacksPromise }: props) {
                         <Suspense fallback={
                             <div className="col-span-full flex flex-col gap-5 mx-auto justify-center items-center">
                                 <h1>Loading Technologies
-                                </h1> <span className="loading loading-bars loading-xl"> </span>
+                                </h1> <span className=" bg-linear-to-r from-[#FF5722] via-[#D81B7E] to-[#7C3AED] loading loading-bars loading-xl"> </span>
                             </div>
                         }>
 
@@ -45,13 +62,15 @@ export default function Technology({ stacksPromise }: props) {
                         </Suspense>
                     </div>
 
-                    <div className="w-full lg:w-1/6">
-                        <div className="border border-gray-100 p-5 rounded-xl sticky top-5">
+                    <div className="w-full lg:w-1/5">
+                        <div className="border border-gray-200 p-5 rounded-xl  flex flex-col">
                             <h2 className="font-bold text-black text-lg">Your Stack</h2>
-                            <p className="mt-2 text-gray-600 text-sm">No technologies selected yet.</p>
 
-                            <div className="space-y-5 border border-gray-100 p-3 rounded-xl mt-5">
-                                {
+                            <p className="mt-2 text-gray-600 text-sm">
+                                {selectedStacks.length ? `${selectedStacks.length} Technology Selected` : `No technologies selected yet.`}</p>
+
+                            <div className="mx-auto w-full space-y-5 border border-gray-100 p-3 rounded-xl mt-5">
+                                {selectedStacks.length ?
                                     selectedStacks.map(selectedStack => <TechStackSelected key={selectedStack.id}
                                         setSelectedStacks={setSelectedStacks}
                                         selectedStack={selectedStack}
@@ -59,8 +78,22 @@ export default function Technology({ stacksPromise }: props) {
                                     >
 
                                     </TechStackSelected>)
-                                }
+
+                                    :
+
+                                    <p className="text-center">Your stack is empty.</p>}
+
+
+
+
+
+
                             </div>
+                            <button className="hover:bg-red-100
+                            text-red-500 border border-red-500
+                            p-2 rounded-xl font-bold mt-5"
+                                onClick={handelRemoveAll}
+                            >Remove All</button>
                         </div>
                     </div>
 
